@@ -1,0 +1,38 @@
+package com.xj.pattern.CreativePattern.prototypePattern.shapes;
+
+/**
+ * Circle
+ *
+ * @author XuJun
+ * @version v1.0
+ * {@code @createDate} 2022/7/15
+ * <p>简单形状
+ */
+public class Circle extends Shape {
+    public int radius;
+
+    public Circle() {
+
+    }
+
+    public Circle(Circle target) {
+        super(target);
+        if (target != null) {
+            this.radius = target.radius;
+        }
+    }
+
+    @Override
+    public Shape clone() {
+        return new Circle(this);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Circle) || !super.equals(obj)) {
+            return false;
+        }
+        Circle shape2 = (Circle) obj;
+        return shape2.radius == radius;
+    }
+}

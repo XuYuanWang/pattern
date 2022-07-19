@@ -1,0 +1,39 @@
+package com.xj.pattern.CreativePattern.singletonPattern.multiThread;
+
+/**
+ * Demo
+ *
+ * @author XuJun
+ * @version v1.0
+ * {@code @createDate} 2022/7/15
+ * <p>
+ *     让你能够保证一个类只有一个实列，并提供一个访问该实例的全局节点。
+ */
+public class Demo
+{
+    public static void main(String[] args) {
+        System.out.println("If you see the same value, then singleton was reused (yay!)" + "\n" +
+                "If you see different values, then 2 singletons were created (booo!!)" + "\n\n" +
+                "RESULT:" + "\n");
+        Thread threadFoo = new Thread(new ThreadFoo());
+        Thread threadBar = new Thread(new ThreadBar());
+        threadFoo.start();
+        threadBar.start();
+    }
+
+    static class ThreadFoo implements Runnable {
+        @Override
+        public void run() {
+            Singleton singleton = Singleton.getInstance("FOO");
+            System.out.println(singleton.value);
+        }
+    }
+
+    static class ThreadBar implements Runnable {
+        @Override
+        public void run() {
+            Singleton singleton = Singleton.getInstance("BAR");
+            System.out.println(singleton.value);
+        }
+    }
+}
